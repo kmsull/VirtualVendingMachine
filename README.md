@@ -26,22 +26,24 @@ HTML, CSS, and any other Javascript framework allowed for frontend
 
 
 ## Soda Lineup
-Product Name: Fizz
-Description: An effervescent fruity experience with hints of grape and coriander.
-Cost: 1 dollar US
-Maximum Quantity available to vend: 100
-Product Name: Pop
-Description: An explosion of flavor that will knock your socks off!
-Cost: 1 dollar US
+-Product Name: Fizz
+-Description: An effervescent fruity experience with hints of grape and coriander.
+-Cost: 1 dollar US
+-Maximum Quantity available to vend: 100
 
-Maximum Quantity available to Vend: 100
-Product Name: Cola
-Description: A basic no nonsense cola that is the perfect pick me up for any occasion.
-Cost: 1 dollar US
-Maximum Quantity available to vend: 200
-Product Name: Mega Pop
-Description: Not for the faint of heart. So flavorful and so invigorating, it should probably be
-illegal.
-Cost: 1 dollar US
-Maximum Quantity available to vend: 50
+-Product Name: Pop
+-Description: An explosion of flavor that will knock your socks off!
+-Cost: 1 dollar US
+-Maximum Quantity available to Vend: 100
+
+-Product Name: Cola
+-Description: A basic no nonsense cola that is the perfect pick me up for any occasion.
+-Cost: 1 dollar US
+-Maximum Quantity available to vend: 200
+
+-Product Name: Mega Pop
+-Description: Not for the faint of heart. So flavorful and so invigorating, it should probably be
+-illegal.
+-Cost: 1 dollar US
+-Maximum Quantity available to vend: 50
 
