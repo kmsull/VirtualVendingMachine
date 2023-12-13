@@ -12,17 +12,17 @@ how well the product sells. Marketing has also requested the ability to change t
 set promotional windows.
 
 ## Project Requirements
-Webpage that acts as UI for customers to buy 'virtual soda' with look and feel of real vending machine.
-On purchase, the browser will download a JSON soda file. I.E. if a 'Cola' is purchased, the machine will download the "Cola" File.
-Some representation of Money
-HTTP API for admin to check stock levels, and restock invetory
-Inventory is not always restocked all at once
-Also need access to price updates
-Fully stocked machine needs to have all sodas, prices, and quantities available
+- Webpage that acts as UI for customers to buy 'virtual soda' with look and feel of real vending machine.
+- On purchase, the browser will download a JSON soda file. I.E. if a 'Cola' is purchased, the machine will download the "Cola" File.
+- Some representation of Money
+- HTTP API for admin to check stock levels, and restock invetory
+- Inventory is not always restocked all at once
+- Also need access to price updates
+- Fully stocked machine needs to have all sodas, prices, and quantities available
 
 ## Restrictions
-Must use NodeJS, Python, or Go for Backend.
-HTML, CSS, and any other Javascript framework allowed for frontend
+- Must use NodeJS, Python, or Go for Backend.
+- HTML, CSS, and any other Javascript framework allowed for frontend
 
 
 ## Soda Lineup
