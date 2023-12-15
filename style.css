@@ -1,0 +1,131 @@
+body {
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+  }
+  
+  .VendingMachine {
+    width: 1000px; 
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgb(62, 62, 63);
+    border-radius: 10px;
+  }
+
+  .machineTitle {
+    background-color: silver;
+    text-align: center;
+    border-radius: 5px;
+    margin-top:50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-bottom: 100px;
+    padding: 30px
+  }
+
+  .machineBody {
+    margin: 100px;
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center
+  }
+
+  .SodaProducts {
+    width: 300px;
+    height: 500px;
+    border: 3px solid black;
+  }
+
+  .SodaProductsTopRow {
+    height: 250px;
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center
+  }
+
+  .SodaProductsBottomRow {
+    height: 250px;
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center
+  }
+
+  .ColaCan {
+    width: 100px;
+    height: 200px;
+    border-radius: 8px;
+    background-color: blue;
+    align-content: center;
+    float: left;
+}
+
+.PopCan {
+    width: 100px;
+    height: 200px;
+    border-radius: 8px;
+    background-color: rgb(76, 173, 47);
+    align-content: center;
+    float: left;
+}
+
+.FizzCan {
+    width: 100px;
+    height: 200px;
+    border-radius: 8px;
+    background-color: rgb(142, 26, 165);
+    align-content: center;
+    float: left;
+}
+
+.MegapopCan {
+    width: 100px;
+    height: 200px;
+    border-radius: 8px;
+    background-color: rgb(187, 16, 16);
+    align-content: center;
+    float: left;
+}
+
+
+.CanTitle {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    padding-top: 25px;
+
+}
+
+.MachineRightSide {
+    border: 1px solid black;
+    height: 500px;
+}
+
+.display {
+    border: 1px solid silver;
+    height: 50%;
+    width: 100%;
+}
+
+.displayMonitor {
+    border: 1px solid black;
+    width: 75%;
+    height: 25%;
+    margin-left: 12%;
+}
+
+  .buttons {
+    display: flex;
+    align-items: flex-start; 
+    border: 1px solid silver;
+    height: 50%;
+    width: 100%;
+  }
+  
+  button {
+    flex: 1; 
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff; 
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px; 
+    cursor: pointer;
+  }

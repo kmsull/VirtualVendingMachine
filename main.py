@@ -28,8 +28,6 @@ def adm_check_stock():
 @app.route('/api/admin/restock', methods=['POST'])
 def adm_restock():
     
-        
-    
     # This Function is called from the Admin HTTP API
     # Function takes from the API:
     # The Soda name and amount of stock to add to the machine
@@ -65,7 +63,10 @@ def cst_display_stock():
 
 
 @app.route('/api/customer_purchase', methods=['POST'])
-def cst_purchase():    
+def cst_purchase():
+    
+    # 
+        
     with open('stock.json') as f:
         current_soda_stock = json.load(f)
     
