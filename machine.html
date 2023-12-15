@@ -4,56 +4,104 @@
     <head>
         
         <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+        <script>
+            window.addEventListener('load', function() {
+                document.getElementById('purchaseButton').addEventListener('click', function() {
+                    location.reload();
+                });
+            });
+        </script>
 
         <title> ColaCo Vending </title>
     
     </head>
-    <body>
+    <body onload="queryStock()">
         <div class="VendingMachine">
-            
+            <button onclick="adminMode()"> Admin Mode </button>
             <h1 class="machineTitle">ColaCo's Delicious Sodas</h1>
+            
                 <div class="machineBody">
                     <div class="SodaProducts">
                         <div class="SodaProductsTopRow">
-                                <div class="ColaCan">
-                                    <div class="CanTitle">
-                                        <h2>COLA</h2>
+                                <div class="CanSlot">
+                                    <div class="ColaCan">
+                                        <div class="CanTitle">
+                                            <h2>COLA</h2>
+                                        </div>
                                     </div>
+                                    <h3 class="availability"><span id="colaAvail"></span></h3>
+                                    <h3 class="price">Price: $<span id="colaPrice"></span</h3>
                                 </div>
-                                <div class="PopCan">
-                                    <div class="CanTitle">
-                                        <h2>POP</h2>
+                                <div class="CanSlot">
+                                    <div class="PopCan">
+                                        <div class="CanTitle">
+                                            <h2>POP</h2>
+                                        </div>
                                     </div>
+                                    <h3 class="availability"><span id="popAvail"></span></h3>
+                                    <h3 class="price">Price: $<span id="popPrice"></span</h3>
                                 </div>
                         </div>
                         <div class="SodaProductsBottomRow">
-                                <div class="FizzCan">
-                                    <div class="CanTitle">
-                                        <h2>FIZZ</h2>
+                                <div class="CanSlot">
+                                    <div class="FizzCan">
+                                        <div class="CanTitle">
+                                            <h2>FIZZ</h2>
+                                        </div>
                                     </div>
+                                    <h3 class="availability"><span id="fizzAvail"></span></h3>
+                                    <h3 class="price">Price: $<span id="fizzPrice"></span</h3>
                                 </div>
-                                <div class="MegapopCan">
-                                    <div class="CanTitle">
-                                        <h2>MEGA</h2>
-                                        <h2 style="padding-top:10px;">POP</h2>
+                                <div class="CanSlot">
+                                    <div class="MegapopCan">
+                                        <div class="CanTitle">
+                                            <h2>MEGA</h2>
+                                            <h2 style="padding-top:10px;">POP</h2>
+                                        </div>
                                     </div>
+                                    <h3 class="availability"><span id="megaAvail"></span></h3>
+                                    <h3 class="price">Price: $<span id="megaPrice"></span</h3>
                                 </div>
+                                
                         </div>
                     </div>
+
                     <div class="MachineRightSide">
+
                         <div class="display">
                             <h2 class="displayMonitor">Make a selection!</h2>
                         </div>
-                        <div class="buttons">
-                            <button> Cola </button>
-                            <button> Pop </button>
-                            <button> Fizz </button>
-                            <button> MegaPop </button>
-                        </div>
-                    </div>
-                    <div class="MoneyPanel">
-                        
 
+                        <div class="buttons">
+
+                            <div class="upperButtons">
+                                <button class="colaButton" id="purchaseButton" onclick="purchase_cola()"> Cola </button>
+                                <button class="popButton" id="purchaseButton" onclick="purchase_pop()"> Pop </button>
+                            </div>
+
+                            <div class="lowerButtons">
+                                <button class="fizzButton" id="purchaseButton" onclick="purchase_fizz()"> Fizz </button>
+                                <button class="megaButton" id="purchaseButton" onclick="purchase_megapop()"> MegaPop </button>
+                            </div>
+                        
+                        </div>
+
+                        <div class="MoneyPanel">
+
+                            <h3>Insert coins/bills</h3>
+                            <div class="slots">
+                                <div class="billSlot"></div>
+                                <div class="coinSlot"></div>
+                            </div>
+
+                            <div class="moneySelect">
+                                <button> <img src="./png/dollar-bill.png" alt="$1"></button>
+                                <button> <img src="./png/dollar-bills.png" alt="$5"></button>
+                                <button> <img src="./png/coin.png" alt="25c"></button>
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>

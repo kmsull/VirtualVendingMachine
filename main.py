@@ -1,8 +1,11 @@
 # To build the python backened and allow for HTTP API calls, we will use the Flask web framework
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
+
+CORS(app)
 
 with open('stock.json') as f:
     current_soda_stock = json.load(f)
@@ -57,12 +60,12 @@ def adm_restock():
 def cst_display_stock():
     with open('stock.json') as f:
         current_soda_stock = json.load(f)    
-    return jsonify(current_soda_stock)
+    return json.dumps(current_soda_stock)
 
 
 
 
-@app.route('/api/customer_purchase', methods=['POST'])
+@app.route('/api/customer_purchase', methods=['POST', 'GET'])
 def cst_purchase():
     
     # 
@@ -80,10 +83,6 @@ def cst_purchase():
     return jsonify(current_soda_stock)
     
 
-
-
-## Need some dictionary / Key-Value data structure to represent Virtual Sodas.
-### Ideally, design is fluent within HTML design as well
 
 
 MACHINE_CASH = 100
