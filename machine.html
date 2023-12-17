@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="style.css">
         <script src="main.js"></script>
 
+        <script>
+
+        </script>
+
         <title> ColaCo Vending </title>
     
     </head>
@@ -13,18 +17,54 @@
         <div class="VendingMachine">
             <button id="adminButton" onclick="admin_mode()"> Admin Mode </button>
             <div id="overlay" onclick="close_admin()"></div>
+            
             <div id="adminAccess">
                 <button onclick="close_admin()"> Exit </button>
-                <h1> Machine Balance </h1>
-                <h2> $<span id="machineBalance"></span></h2>
-                <h2> <span id="numPurchases"></span> </h2>
-                <h2> <span id="numRestock"></span> </h2>
-                <h1> Soda Quantities/Maximum </h1>
-                <h2> Cola: <span class="numbers" id="adminColaAvail"></span>/<span id="colaMax"></span></h2>
-                <h2> Cola: <span class="numbers" id="adminPopAvail"></span>/<span id="popMax"></span></h2>
-                <h2> Cola: <span class="numbers" id="adminFizzAvail"></span>/<span id="fizzMax"></span></h2>
-                <h2> Cola: <span class="numbers" id="adminMegaAvail"></span>/<span id="megaMax"></span></h2>
+                <div class="adminLeft">
+                    <h1> Machine Information</h1>
+                    <h2> Balance: $<span id="machineBalance"></span></h2>
+                    <h2> Number of Purchases: <span id="numPurchases"></span> </h2>
+                    <h2> Number of Restocks: <span id="numRestock"></span> </h2>
+                </div>
+                <div class="adminRight">
+                    <h1> Soda Quantities/Maximum </h1>
+                    <h2>
+                        Cola: <span class="numbers" id="adminColaAvail"></span>
+                        /<span id="colaMax"></span>
+                        <input type="number" id="restockInputCola" class="restockInput" placeholder="Qty">
+                        <button class="restock" onclick="restock('Cola')">Restock</button>
+                        <input type="number" id="priceChangeInputCola" class="restockInput" placeholder="New $">
+                        <button class="restock" onclick="change_price('Cola')">Reprice</button>
+                    </h2>
+                    <h2> 
+                        Pop: <span class="numbers" id="adminPopAvail"></span>
+                        /<span id="popMax"></span>
+                        <input type="number" id="restockInputPop" class="restockInput" placeholder="Qty">
+                        <button class="restock" onclick="restock('Pop')">Restock</button>
+                        <input type="number" id="priceChangeInputPop" class="restockInput" placeholder="New $">
+                        <button class="restock" onclick="change_price('Pop')">Reprice</button>
+                    </h2>
+                    <h2> 
+                        Fizz: <span class="numbers" id="adminFizzAvail"></span>
+                        /<span id="fizzMax"></span>
+                        <input type="number" id="restockInputFizz" class="restockInput" placeholder="Qty">
+                        <button class="restock" onclick="restock('Fizz')">Restock</button>
+                        <input type="number" id="priceChangeInputFizz" class="restockInput" placeholder="New $">
+                        <button class="restock" onclick="change_price('Fizz')">Reprice</button>
+                    </h2>
+                    <h2> 
+                        MegaPop: <span class="numbers" id="adminMegaAvail"></span>
+                        /<span id="megaMax"></span>
+                        <input type="number" id="restockInputMegaPop" class="restockInput" placeholder="Qty">
+                        <button class="restock" onclick="restock('MegaPop')">Restock</button>
+                        <input type="number" id="priceChangeInputMegaPop" class="restockInput" placeholder="New $">
+                        <button class="restock" onclick="change_price('MegaPop')">Reprice</button>
+                    </h2>
+                </div>
             </div>
+                
+                
+                
 
             <h1 class="machineTitle">ColaCo's Delicious Sodas</h1>
              
@@ -32,6 +72,7 @@
                     <div class="SodaProducts">
                         <div class="SodaProductsTopRow">
                                 <div class="CanSlot">
+                                    <h3 class="availabilityBin">A1</span></h3>
                                     <div class="ColaCan">
                                         <div class="CanTitle">
                                             <h2>COLA</h2>
@@ -41,6 +82,7 @@
                                     <h3 class="price">Price: $<span id="colaPrice"></span</h3>
                                 </div>
                                 <div class="CanSlot">
+                                    <h3 class="availabilityBin">A2</span></h3>
                                     <div class="PopCan">
                                         <div class="CanTitle">
                                             <h2>POP</h2>
@@ -52,6 +94,7 @@
                         </div>
                         <div class="SodaProductsBottomRow">
                                 <div class="CanSlot">
+                                    <h3 class="availabilityBin">B1</span></h3>
                                     <div class="FizzCan">
                                         <div class="CanTitle">
                                             <h2>FIZZ</h2>
@@ -61,6 +104,7 @@
                                     <h3 class="price">Price: $<span id="fizzPrice"></span</h3>
                                 </div>
                                 <div class="CanSlot">
+                                    <h3 class="availabilityBin">B2</span></h3>
                                     <div class="MegapopCan">
                                         <div class="CanTitle">
                                             <h2>MEGAPOP</h2>
@@ -86,12 +130,12 @@
 
                             <div class="upperButtons">
                                 <button class="selectionButton" id="purchaseButton" onclick="code_change('A')"> A </button>
-                                <button class="selectionButton" id="purchaseButton" onclick="code_change('B')"> B </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('2')"> 2 </button>
                             </div>
 
                             <div class="lowerButtons">
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('B')"> B </button>
                                 <button class="selectionButton" id="purchaseButton" onclick="code_change('1')"> 1 </button>
-                                <button class="selectionButton" id="purchaseButton" onclick="code_change('2')"> 2 </button>
                             </div>
 
                             <div class="purchaseSelectionArea">
@@ -119,7 +163,9 @@
 
                         </div>
                     </div>
+                    
                 </div>
+                <div class="outSlot"></div>
             </div>
     </body>
 

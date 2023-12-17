@@ -12,6 +12,24 @@ with open('stock.json') as f:
 
 
 ## ADMIN FUNCTIONS
+# Price Change
+# Api Def to change price of soda
+@app.route('/api/admin/price_change', methods=['POST'])
+def adm_price_change():
+    with open('stock.json') as f:
+        current_soda_stock = json.load(f)    
+
+    # Process the request into a json
+    incoming = request.json
+    sodaName = incoming["sodaName"]
+    newPrice = incoming['newPrice']
+    
+    current_soda_stock[sodaName]['price'] = newPrice
+    
+    with open('stock.json', 'w') as f:
+        json.dump(current_soda_stock, f)
+    
+    return jsonify(current_soda_stock)
 
 # Check Stock
 # API Definition to check stock
@@ -47,6 +65,7 @@ def adm_restock():
     
     if available + restockQuantity <= maxRestock:
         current_soda_stock[sodaName]["available"] += restockQuantity
+        current_soda_stock['AdminInfo']['times_restock'] += 1
     
     with open('stock.json', 'w') as f:
         json.dump(current_soda_stock, f)
@@ -61,9 +80,6 @@ def cst_display_stock():
         current_soda_stock = json.load(f)    
     return json.dumps(current_soda_stock)
 
-
-
-
 @app.route('/api/customer_purchase', methods=['POST', 'GET'])
 def cst_purchase():
     
@@ -76,6 +92,8 @@ def cst_purchase():
     sodaName = incoming["sodaName"]
     if current_soda_stock[sodaName]["available"] != 0:
         current_soda_stock[sodaName]["available"] -= 1
+        current_soda_stock['AdminInfo']['balance'] += current_soda_stock[sodaName]['price']
+        current_soda_stock['AdminInfo']['purchases'] += 1
     with open('stock.json', 'w') as f:
         json.dump(current_soda_stock, f)
     

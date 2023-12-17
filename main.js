@@ -41,32 +41,286 @@ function code_change (code) {
     
 }
 
-function enter_purchase () {
+function restock(sodaName) {
+    if (sodaName == "Cola") {
+        restockInput = document.getElementById("restockInputCola")
+        restockQty = restockInput.value
+        restockQty = parseInt(restockQty)
+    }
+    if (sodaName == "Pop") {
+        restockInput = document.getElementById("restockInputPop")
+        restockQty = restockInput.value
+        restockQty = parseInt(restockQty)
+    }
+    if (sodaName == "Fizz") {
+        restockInput = document.getElementById("restockInputFizz")
+        restockQty = restockInput.value
+        restockQty = parseInt(restockQty)
+    }
+    if (sodaName == "MegaPop") {
+        restockInput = document.getElementById("restockInputMegaPop")
+        restockQty = restockInput.value
+        restockQty = parseInt(restockQty)
+    }
+    if (sodaName == "Cola" && restockQty <= (colaMax-colaAvail)) {
+        // Cola
+
+        
+
+        const cola_data = {
+            'sodaName':'Cola',
+            'restockQuantity': restockQty
+        }
     
+        fetch('http://127.0.0.1:5000/api/admin/restock', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        colaAvail += restockQty
+        document.getElementById("colaAvail").innerText = colaAvail
+        document.getElementById("adminColaAvail").innerText = colaAvail
+        numRestock += 1
+        document.getElementById("numRestock").innerText = numRestock
+
+
+    } if (sodaName == "Pop" && restockQty <= (popMax-popAvail)) {
+        // Pop
+
+        
+
+        const cola_data = {
+            'sodaName':'Pop',
+            'restockQuantity': restockQty
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/restock', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        popAvail += restockQty
+        document.getElementById("popAvail").innerText = popAvail
+        document.getElementById("adminPopAvail").innerText = popAvail
+        numRestock += 1
+        document.getElementById("numRestock").innerText = numRestock
+
+    }  if (sodaName == "Fizz" && restockQty <= (fizzMax-fizzAvail)) {
+        // Fizz
+
+        
+
+        const cola_data = {
+            'sodaName':'Fizz',
+            'restockQuantity': restockQty
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/restock', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        fizzAvail += restockQty
+        document.getElementById("fizzAvail").innerText = fizzAvail
+        document.getElementById("adminFizzAvail").innerText = fizzAvail
+        numRestock += 1
+        document.getElementById("numRestock").innerText = numRestock
+
+    }  if (sodaName == "MegaPop" && restockQty <= (fizzMax-fizzAvail)) {
+        // MegaPop
+
+        
+
+        const cola_data = {
+            'sodaName':'MegaPop',
+            'restockQuantity': restockQty
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/restock', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        megaAvail += restockQty
+        document.getElementById("megaAvail").innerText = megaAvail
+        document.getElementById("adminMegaAvail").innerText = megaAvail
+        numRestock += 1
+        document.getElementById("numRestock").innerText = numRestock
+
+    }
+    restockInput.value = ''
+}
+
+function enter_purchase () {
+    var defaultCode = "OO"
     if (purchaseCode.localeCompare("A1") == 0) {
         sodaName = "Cola"
-        purchaseCode = "ENJOY! Press clr"
+        purchaseCode = "Cola! Enjoy!"
         purchase_soda(sodaName)
         document.getElementById("purchaseCode").innerText = purchaseCode
     } else if (purchaseCode.localeCompare("A2") == 0) {
         sodaName = "Pop"
-        purchaseCode = "ENJOY!"
+        purchaseCode = "Pop! Enjoy!"
         purchase_soda(sodaName)
         document.getElementById("purchaseCode").innerText = purchaseCode
     } else if (purchaseCode.localeCompare("B1") == 0) {
         sodaName = "Fizz"
-        purchaseCode = "ENJOY!"
+        purchaseCode = "Fizz! Enjoy!"
         purchase_soda(sodaName)
         document.getElementById("purchaseCode").innerText = purchaseCode
     } else if (purchaseCode.localeCompare("B2") == 0) {
         sodaName = "MegaPop"
-        purchaseCode = "ENJOY!"
+        purchaseCode = "MegaPop! Enjoy!"
         purchase_soda(sodaName)
         document.getElementById("purchaseCode").innerText = purchaseCode
     } else {
         purchaseCode = "Invalid | Try Again"
         document.getElementById("purchaseCode").innerText = purchaseCode
+        
+        document.getElementById("purchaseCode").innerText = purchaseCode
     }
+}
+
+function change_price (sodaName) {
+    
+
+    if (sodaName == "Cola") {
+        // Cola
+        priceChangeInput = document.getElementById('priceChangeInputCola')
+        newPrice =  priceChangeInput.value
+        newPrice = parseInt(newPrice)
+        const cola_data = {
+            'sodaName':'Cola',
+            'newPrice': newPrice
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/price_change', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        colaPrice = newPrice
+        document.getElementById("colaPrice").innerText = colaPrice
+
+
+    }  if (sodaName == "Pop") {
+        // Pop
+
+        priceChangeInput = document.getElementById('priceChangeInputPop')
+        newPrice =  priceChangeInput.value
+        newPrice = parseInt(newPrice)
+
+        const cola_data = {
+            'sodaName':'Pop',
+            'newPrice': newPrice
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/price_change', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        popPrice = newPrice
+        document.getElementById("popPrice").innerText = popPrice
+
+    }  if (sodaName == "Fizz") {
+        // Fizz
+
+        priceChangeInput = document.getElementById('priceChangeInputFizz')
+        newPrice =  priceChangeInput.value
+        newPrice = parseInt(newPrice)
+
+        const cola_data = {
+            'sodaName':'Fizz',
+            'newPrice': newPrice
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/price_change', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        fizzPrice = newPrice
+        document.getElementById("fizzPrice").innerText = fizzPrice
+
+    }  if (sodaName == 'MegaPop') {
+        // MegaPop
+
+        priceChangeInput = document.getElementById('priceChangeInputMegaPop')
+        newPrice =  priceChangeInput.value
+        newPrice = parseInt(newPrice)
+
+        const cola_data = {
+            'sodaName':'MegaPop',
+            'newPrice': newPrice
+        }
+    
+        fetch('http://127.0.0.1:5000/api/admin/price_change', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache',
+    
+            },
+            body: JSON.stringify(cola_data)
+            }).then(response => {
+                // checking for a response
+            }).catch(error => {console.error('Error:', error);
+        });
+        megaPrice = newPrice
+        document.getElementById("megaPrice").innerText = megaPrice
+
+    }
+    priceChangeInput.value = ''
 }
 
 function download_soda_file(sodaName) {
@@ -111,9 +365,9 @@ function query_stock() {
             // Declare Available ID 2 times to be displayed on the Admin panel
             // Without inheriting the hidden attribute
             document.getElementById("adminPopAvail").innerText = popAvail
-            document.getElementById("adminColaAvail").innerText = popAvail
-            document.getElementById("adminFizzAvail").innerText = popAvail
-            document.getElementById("adminMegaAvail").innerText = popAvail
+            document.getElementById("adminColaAvail").innerText = colaAvail
+            document.getElementById("adminFizzAvail").innerText = fizzAvail
+            document.getElementById("adminMegaAvail").innerText = megaAvail
 
             document.getElementById("popPrice").innerText = popPrice
             document.getElementById("colaPrice").innerText = colaPrice
@@ -147,6 +401,10 @@ function purchase_soda (sodaName) {
         if (customerBalance >= colaPrice) {
             customerBalance -= colaPrice
             document.getElementById("customerBalance").innerText = customerBalance
+            machineBalance += colaPrice
+            document.getElementById("machineBalance").innerText = machineBalance
+            numPurchases += 1
+            document.getElementById("numPurchases").innerText = numPurchases
             const cola_data = {
                 'sodaName':'Cola'
             }
@@ -165,6 +423,7 @@ function purchase_soda (sodaName) {
             });
             colaAvail = colaAvail - 1
             document.getElementById("colaAvail").innerText = colaAvail
+
         } else {
             purchaseCode = "Insert Credit"
             document.getElementById("purchaseCode").innerText = purchaseCode
@@ -174,6 +433,10 @@ function purchase_soda (sodaName) {
         if (customerBalance >= popPrice) {
             customerBalance -= popPrice
             document.getElementById("customerBalance").innerText = customerBalance
+            machineBalance += popPrice
+            document.getElementById("machineBalance").innerText = machineBalance
+            numPurchases += 1
+            document.getElementById("numPurchases").innerText = numPurchases
             const cola_data = {
                 'sodaName':'Pop'
             }
@@ -201,6 +464,10 @@ function purchase_soda (sodaName) {
         if (customerBalance >= fizzPrice) {
             customerBalance -= fizzPrice
             document.getElementById("customerBalance").innerText = customerBalance
+            machineBalance += fizzPrice
+            document.getElementById("machineBalance").innerText = machineBalance
+            numPurchases += 1
+            document.getElementById("numPurchases").innerText = numPurchases
             const cola_data = {
                 'sodaName':'Fizz'
             }
@@ -225,11 +492,13 @@ function purchase_soda (sodaName) {
         }
     }   
     if (sodaName == "MegaPop") {
-        if (customerBalance >= fizzPrice) {
-            customerBalance -= fizzPrice
-            machineBalance += fizzPrice
+        if (customerBalance >= megaPrice) {
+            customerBalance -= megaPrice
+            machineBalance += megaPrice
             document.getElementById("machineBalance").innerText = machineBalance
             document.getElementById("customerBalance").innerText = customerBalance
+            numPurchases += 1
+            document.getElementById("numPurchases").innerText = numPurchases
             const cola_data = {
                 'sodaName':'MegaPop'
             }
@@ -255,28 +524,4 @@ function purchase_soda (sodaName) {
     }
     
 
-}
-
-function purchase_cola () {
-    /// Function to send API call to purchase a cola
-    /// Need to download sodafile.json
-    
-}
-
-function purchase_pop () {
-    /// Function to send API call to purchase a pop
-    /// Need to download sodafile.json
-    
-}
-
-function purchase_fizz () {
-    /// Function to send API call to purchase a fizz
-    /// Need to download sodafile.json
-    
-}
-
-function purchase_megapop () {
-    /// Function to send API call to purchase a megapop
-    /// Need to download sodafile.json
-    
 }
