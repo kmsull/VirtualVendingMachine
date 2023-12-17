@@ -10,7 +10,6 @@ CORS(app)
 with open('stock.json') as f:
     current_soda_stock = json.load(f)
 
-print(current_soda_stock)
 
 ## ADMIN FUNCTIONS
 

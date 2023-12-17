@@ -5,23 +5,30 @@
         
         <link rel="stylesheet" href="style.css">
         <script src="main.js"></script>
-        <script>
-            window.addEventListener('load', function() {
-                document.getElementById('purchaseButton').addEventListener('click', function() {
-                    location.reload();
-                });
-            });
-        </script>
 
         <title> ColaCo Vending </title>
     
     </head>
-    <body onload="queryStock()">
+    <body onload="query_stock();close_admin()">
         <div class="VendingMachine">
-            <button onclick="adminMode()"> Admin Mode </button>
+            <button id="adminButton" onclick="admin_mode()"> Admin Mode </button>
+            <div id="overlay" onclick="close_admin()"></div>
+            <div id="adminAccess">
+                <button onclick="close_admin()"> Exit </button>
+                <h1> Machine Balance </h1>
+                <h2> $<span id="machineBalance"></span></h2>
+                <h2> <span id="numPurchases"></span> </h2>
+                <h2> <span id="numRestock"></span> </h2>
+                <h1> Soda Quantities/Maximum </h1>
+                <h2> Cola: <span class="numbers" id="adminColaAvail"></span>/<span id="colaMax"></span></h2>
+                <h2> Cola: <span class="numbers" id="adminPopAvail"></span>/<span id="popMax"></span></h2>
+                <h2> Cola: <span class="numbers" id="adminFizzAvail"></span>/<span id="fizzMax"></span></h2>
+                <h2> Cola: <span class="numbers" id="adminMegaAvail"></span>/<span id="megaMax"></span></h2>
+            </div>
+
             <h1 class="machineTitle">ColaCo's Delicious Sodas</h1>
-            
-                <div class="machineBody">
+             
+                <div id="CustomerFace" class="machineBody">
                     <div class="SodaProducts">
                         <div class="SodaProductsTopRow">
                                 <div class="CanSlot">
@@ -30,7 +37,7 @@
                                             <h2>COLA</h2>
                                         </div>
                                     </div>
-                                    <h3 class="availability"><span id="colaAvail"></span></h3>
+                                    <h3 class="availability">Qty: <span id="colaAvail"></span></h3>
                                     <h3 class="price">Price: $<span id="colaPrice"></span</h3>
                                 </div>
                                 <div class="CanSlot">
@@ -39,7 +46,7 @@
                                             <h2>POP</h2>
                                         </div>
                                     </div>
-                                    <h3 class="availability"><span id="popAvail"></span></h3>
+                                    <h3 class="availability">Qty: <span id="popAvail"></span></h3>
                                     <h3 class="price">Price: $<span id="popPrice"></span</h3>
                                 </div>
                         </div>
@@ -50,62 +57,70 @@
                                             <h2>FIZZ</h2>
                                         </div>
                                     </div>
-                                    <h3 class="availability"><span id="fizzAvail"></span></h3>
+                                    <h3 class="availability">Qty: <span id="fizzAvail"></span></h3>
                                     <h3 class="price">Price: $<span id="fizzPrice"></span</h3>
                                 </div>
                                 <div class="CanSlot">
                                     <div class="MegapopCan">
                                         <div class="CanTitle">
-                                            <h2>MEGA</h2>
-                                            <h2 style="padding-top:10px;">POP</h2>
+                                            <h2>MEGAPOP</h2>
+                                            
                                         </div>
                                     </div>
-                                    <h3 class="availability"><span id="megaAvail"></span></h3>
+                                    <h3 class="availability">Qty: <span id="megaAvail"></span></h3>
                                     <h3 class="price">Price: $<span id="megaPrice"></span</h3>
                                 </div>
-                                
+                               
                         </div>
+                        
                     </div>
 
                     <div class="MachineRightSide">
 
                         <div class="display">
-                            <h2 class="displayMonitor">Make a selection!</h2>
+                            <h1 class="SelectionMonitor">Make a selection!</h1>\
+                            <h2 class="SelectionMonitor"><span id="purchaseCode"></span></h2>
                         </div>
 
                         <div class="buttons">
 
                             <div class="upperButtons">
-                                <button class="colaButton" id="purchaseButton" onclick="purchase_cola()"> Cola </button>
-                                <button class="popButton" id="purchaseButton" onclick="purchase_pop()"> Pop </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('A')"> A </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('B')"> B </button>
                             </div>
 
                             <div class="lowerButtons">
-                                <button class="fizzButton" id="purchaseButton" onclick="purchase_fizz()"> Fizz </button>
-                                <button class="megaButton" id="purchaseButton" onclick="purchase_megapop()"> MegaPop </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('1')"> 1 </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('2')"> 2 </button>
+                            </div>
+
+                            <div class="purchaseSelectionArea">
+                                <button class="purchaseSelection" id="purchaseSelection" onclick="enter_purchase()"> Purchase </button>
+                                <button class="purchaseSelection" id="purchaseSelection" onclick="clear_code('CLEAR')"> Clear </button>
                             </div>
                         
                         </div>
 
                         <div class="MoneyPanel">
-
+                            
+                            <h2 class="BalanceDisplay"> Balance: $<span id="customerBalance"></span>
                             <h3>Insert coins/bills</h3>
+
                             <div class="slots">
                                 <div class="billSlot"></div>
-                                <div class="coinSlot"></div>
+                                <div class="CoinSlot"></div>
                             </div>
 
                             <div class="moneySelect">
-                                <button> <img src="./png/dollar-bill.png" alt="$1"></button>
-                                <button> <img src="./png/dollar-bills.png" alt="$5"></button>
-                                <button> <img src="./png/coin.png" alt="25c"></button>
+                                <button onclick="add_balance(1)"> <img src="./png/dollar-bill.png" alt="$1"></button>
+                                <button onclick="add_balance(5)"> <img src="./png/dollar-bills.png" alt="$5"></button>
+                                <button onclick="add_balance(0.25)"> <img src="./png/coin.png" alt="25c"></button>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
-        </div>
+            </div>
     </body>
 
 </html>
