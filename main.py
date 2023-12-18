@@ -31,18 +31,6 @@ def adm_price_change():
     
     return jsonify(current_soda_stock)
 
-# Check Stock
-# API Definition to check stock
-@app.route('/api/admin/check_stock', methods=['GET'])
-def adm_check_stock():
-    
-    # This function is called from the Admin HTTP API
-    # Function should return to the admin:
-    # Each soda and its description, current price, quantity, and maxQuantity.
-     
-    with open('stock.json') as f:
-        current_soda_stock = json.load(f)    
-    return jsonify(current_soda_stock)
 
 # API Definition to restock machine
 @app.route('/api/admin/restock', methods=['POST'])
@@ -99,41 +87,9 @@ def cst_purchase():
     
     return jsonify(current_soda_stock)
     
-
-
-
 MACHINE_CASH = 100
-
-
 
 if __name__ == '__main__':
     with app.app_context():
         app.run(debug=True)
-        
-
-    # Function to display current stock { Soda/Desc/Price/Quant }
-    
-    
-    # Get User Input
-        # Customer or admin function
-        
-        # If Customer
-            # Ask Current Balance
-                # Machine accepts 1, 2, 5, 10
-            # Make Selection
-            
-            # Machine checks stock
-            
-            # Provide Soda JSON
-            
-            # Provide the customer with their new balance
-            
-        # If Admin
-            # Ask for selection
-                # Restock or Check Stock
-            # If restock:
-                # ask for Soda Name and restock quantity
-                # adm_restock
-            # If Checkstock:
-                # adm_checkstock
         

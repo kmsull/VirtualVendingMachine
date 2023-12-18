@@ -81,7 +81,6 @@ function restock(sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
             }).catch(error => {console.error('Error:', error);
         });
         colaAvail += restockQty
@@ -92,9 +91,6 @@ function restock(sodaName) {
 
 
     } if (sodaName == "Pop" && restockQty <= (popMax-popAvail)) {
-        // Pop
-
-        
 
         const cola_data = {
             'sodaName':'Pop',
@@ -120,10 +116,7 @@ function restock(sodaName) {
         document.getElementById("numRestock").innerText = numRestock
 
     }  if (sodaName == "Fizz" && restockQty <= (fizzMax-fizzAvail)) {
-        // Fizz
-
-        
-
+     
         const cola_data = {
             'sodaName':'Fizz',
             'restockQuantity': restockQty
@@ -148,9 +141,6 @@ function restock(sodaName) {
         document.getElementById("numRestock").innerText = numRestock
 
     }  if (sodaName == "MegaPop" && restockQty <= (fizzMax-fizzAvail)) {
-        // MegaPop
-
-        
 
         const cola_data = {
             'sodaName':'MegaPop',
@@ -166,7 +156,7 @@ function restock(sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
+
             }).catch(error => {console.error('Error:', error);
         });
         megaAvail += restockQty
@@ -231,7 +221,7 @@ function change_price (sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
+
             }).catch(error => {console.error('Error:', error);
         });
         colaPrice = newPrice
@@ -259,7 +249,7 @@ function change_price (sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
+
             }).catch(error => {console.error('Error:', error);
         });
         popPrice = newPrice
@@ -286,14 +276,14 @@ function change_price (sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
+ 
             }).catch(error => {console.error('Error:', error);
         });
         fizzPrice = newPrice
         document.getElementById("fizzPrice").innerText = fizzPrice
 
     }  if (sodaName == 'MegaPop') {
-        // MegaPop
+
 
         priceChangeInput = document.getElementById('priceChangeInputMegaPop')
         newPrice =  priceChangeInput.value
@@ -313,7 +303,7 @@ function change_price (sodaName) {
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-                // checking for a response
+
             }).catch(error => {console.error('Error:', error);
         });
         megaPrice = newPrice
@@ -323,8 +313,67 @@ function change_price (sodaName) {
     priceChangeInput.value = ''
 }
 
-function download_soda_file(sodaName) {
+function download_soda_file() {
+    console.log(purchaseCode)
+    if (purchaseCode == "Cola! Enjoy!") {
+        const fileName = 'cola.json'; 
+        const url = './sodaFiles/cola.json';
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; 
+        document.body.appendChild(a); 
+        a.click(); 
+        a.remove();
+        
+    }
+    if (purchaseCode == "Pop! Enjoy!") {
+        const fileName = 'pop.json'; 
+        const url = './sodaFiles/pop.json';
 
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; 
+
+        
+        document.body.appendChild(a); 
+
+      
+        a.click(); 
+
+        
+        a.remove();
+        
+    }
+    if (purchaseCode == "Fizz! Enjoy!") {
+        const fileName = 'fizz.json'; 
+        const url = './sodaFiles/fizz.json';
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; 
+
+        document.body.appendChild(a); 
+
+        a.click(); 
+
+        a.remove();
+        
+    }
+    if (purchaseCode == "MegaPop! Enjoy!") {
+        const fileName = 'megapop.json'; 
+        const url = './sodaFiles/megapop.json';
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; 
+
+        document.body.appendChild(a); 
+
+        a.click(); 
+
+        a.remove();
+    }
 }
 
 function query_stock() {
@@ -418,7 +467,6 @@ function purchase_soda (sodaName) {
                 },
                 body: JSON.stringify(cola_data)
                 }).then(response => {
-                    // checking for a response
                 }).catch(error => {console.error('Error:', error);
             });
             colaAvail = colaAvail - 1
@@ -428,6 +476,7 @@ function purchase_soda (sodaName) {
             purchaseCode = "Insert Credit"
             document.getElementById("purchaseCode").innerText = purchaseCode
         }
+        
     } 
     if (sodaName == "Pop") {
         if (customerBalance >= popPrice) {
@@ -450,7 +499,6 @@ function purchase_soda (sodaName) {
                 },
                 body: JSON.stringify(cola_data)
                 }).then(response => {
-                    // checking for a response
                 }).catch(error => {console.error('Error:', error);
             });
             popAvail -= 1
@@ -481,7 +529,6 @@ function purchase_soda (sodaName) {
                 },
                 body: JSON.stringify(cola_data)
                 }).then(response => {
-                    // checking for a response
                 }).catch(error => {console.error('Error:', error);
             });
             fizzAvail -= 1
@@ -512,7 +559,6 @@ function purchase_soda (sodaName) {
                 },
                 body: JSON.stringify(cola_data)
                 }).then(response => {
-                    // checking for a response
                 }).catch(error => {console.error('Error:', error);
             });
             megaAvail -= 1

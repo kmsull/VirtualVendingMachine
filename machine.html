@@ -5,11 +5,6 @@
         
         <link rel="stylesheet" href="style.css">
         <script src="main.js"></script>
-
-        <script>
-
-        </script>
-
         <title> ColaCo Vending </title>
     
     </head>
@@ -139,8 +134,9 @@
                             </div>
 
                             <div class="purchaseSelectionArea">
-                                <button class="purchaseSelection" id="purchaseSelection" onclick="enter_purchase()"> Purchase </button>
+                                <button class="purchaseSelection" id="purchaseSelection" onclick="enter_purchase(); download_soda_file()"> Purchase </button>
                                 <button class="purchaseSelection" id="purchaseSelection" onclick="clear_code('CLEAR')"> Clear </button>
+                                <a id="fileDownload" href="./sodaFiles/cola.json" download style="display: none"></a>
                             </div>
                         
                         </div>
@@ -156,9 +152,19 @@
                             </div>
 
                             <div class="moneySelect">
-                                <button onclick="add_balance(1)"> <img src="./png/dollar-bill.png" alt="$1"></button>
-                                <button onclick="add_balance(5)"> <img src="./png/dollar-bills.png" alt="$5"></button>
-                                <button onclick="add_balance(0.25)"> <img src="./png/coin.png" alt="25c"></button>
+                                <div class="1dollar">
+                                    <button onclick="add_balance(1)"> <img src="./assets/png/dollar-bill.png" alt="$1"></button>
+                                    <h3>Add $1</h3>
+                                </div>
+                                <div class="5dollar">
+                                    <button onclick="add_balance(5)"> <img src="./assets/png/dollar-bills.png" alt="$5"></button>
+                                    <h3>Add $5</h3>
+                                </div>
+                                <div class="1quarter">
+                                    <button onclick="add_balance(0.25)"> <img src="./assets/png/coin.png" alt="25c"></button>
+                                    <h3>Add 0.25¢</h3>
+                                </div>
+                                
                             </div>
 
                         </div>
