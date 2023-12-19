@@ -2,18 +2,21 @@ function XXX () {
     ///
 }
 
+// Function to toggle admin  panel from on to off
 function admin_mode () {
     document.getElementById('adminAccess').style.display = 'block';
     document.getElementById('overlay').style.display = "block";
     document.getElementById('adminButton').style.display = "none"
 }
 
+// Function to toggle admin  panel from off to on
 function close_admin () {
     document.getElementById('adminAccess').style.display = 'none';
     document.getElementById('overlay').style.display = "none";
     document.getElementById('adminButton').style.display = "block"
 }
 
+// Function to add credit to the customers balance when money is 'inserted'
 function add_balance (payment) {
     customerBalance += payment
     document.getElementById("customerBalance").innerText = customerBalance
@@ -21,11 +24,13 @@ function add_balance (payment) {
     document.getElementById("purchaseCode").innerText = purchaseCode
 }
 
+// If the clear button is clicked, the machines purchase code is reset
 function clear_code () {
     purchaseCode = "OO"
     document.getElementById("purchaseCode").innerText = purchaseCode
 }
 
+// When a selection button is puched, the correct code is added to the purchase code and evaulated
 function code_change (code) {
     allowed_codes = ["A1", "A2", "B1", "B2"]
     
@@ -41,6 +46,8 @@ function code_change (code) {
     
 }
 
+// When the admin uses the restock button, this function is called to add the desired amount
+// to the machine stock, as long as there is space in the slot for the restock quantity
 function restock(sodaName) {
     if (sodaName == "Cola") {
         restockInput = document.getElementById("restockInputCola")
@@ -63,21 +70,15 @@ function restock(sodaName) {
         restockQty = parseInt(restockQty)
     }
     if (sodaName == "Cola" && restockQty <= (colaMax-colaAvail)) {
-        // Cola
-
-        
-
         const cola_data = {
             'sodaName':'Cola',
             'restockQuantity': restockQty
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/restock', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-    
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
@@ -88,15 +89,11 @@ function restock(sodaName) {
         document.getElementById("adminColaAvail").innerText = colaAvail
         numRestock += 1
         document.getElementById("numRestock").innerText = numRestock
-
-
     } if (sodaName == "Pop" && restockQty <= (popMax-popAvail)) {
-
         const cola_data = {
             'sodaName':'Pop',
             'restockQuantity': restockQty
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/restock', {
             method: 'POST',
             headers: {
@@ -114,9 +111,7 @@ function restock(sodaName) {
         document.getElementById("adminPopAvail").innerText = popAvail
         numRestock += 1
         document.getElementById("numRestock").innerText = numRestock
-
     }  if (sodaName == "Fizz" && restockQty <= (fizzMax-fizzAvail)) {
-     
         const cola_data = {
             'sodaName':'Fizz',
             'restockQuantity': restockQty
@@ -139,14 +134,11 @@ function restock(sodaName) {
         document.getElementById("adminFizzAvail").innerText = fizzAvail
         numRestock += 1
         document.getElementById("numRestock").innerText = numRestock
-
-    }  if (sodaName == "MegaPop" && restockQty <= (fizzMax-fizzAvail)) {
-
+    }  if (sodaName == "MegaPop" && restockQty <= (megaMax-megaAvail)) {
         const cola_data = {
             'sodaName':'MegaPop',
             'restockQuantity': restockQty
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/restock', {
             method: 'POST',
             headers: {
@@ -164,11 +156,12 @@ function restock(sodaName) {
         document.getElementById("adminMegaAvail").innerText = megaAvail
         numRestock += 1
         document.getElementById("numRestock").innerText = numRestock
-
     }
     restockInput.value = ''
 }
 
+// When the purchase button is pushed, the code that is entered is evaluated to 
+// provide the customer with the right soda information
 function enter_purchase () {
     var defaultCode = "OO"
     if (purchaseCode.localeCompare("A1") == 0) {
@@ -199,11 +192,10 @@ function enter_purchase () {
     }
 }
 
+// When the admin used the reprice button, the price entered in the field is posted to the database
+// and the price on the machine is changed as well
 function change_price (sodaName) {
-    
-
     if (sodaName == "Cola") {
-        // Cola
         priceChangeInput = document.getElementById('priceChangeInputCola')
         newPrice =  priceChangeInput.value
         newPrice = parseInt(newPrice)
@@ -211,171 +203,158 @@ function change_price (sodaName) {
             'sodaName':'Cola',
             'newPrice': newPrice
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/price_change', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-    
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-
             }).catch(error => {console.error('Error:', error);
         });
         colaPrice = newPrice
         document.getElementById("colaPrice").innerText = colaPrice
-
-
     }  if (sodaName == "Pop") {
-        // Pop
-
         priceChangeInput = document.getElementById('priceChangeInputPop')
         newPrice =  priceChangeInput.value
         newPrice = parseInt(newPrice)
-
         const cola_data = {
             'sodaName':'Pop',
             'newPrice': newPrice
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/price_change', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-    
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-
             }).catch(error => {console.error('Error:', error);
         });
         popPrice = newPrice
         document.getElementById("popPrice").innerText = popPrice
-
     }  if (sodaName == "Fizz") {
-        // Fizz
-
         priceChangeInput = document.getElementById('priceChangeInputFizz')
         newPrice =  priceChangeInput.value
         newPrice = parseInt(newPrice)
-
         const cola_data = {
             'sodaName':'Fizz',
             'newPrice': newPrice
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/price_change', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-    
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
- 
             }).catch(error => {console.error('Error:', error);
         });
         fizzPrice = newPrice
         document.getElementById("fizzPrice").innerText = fizzPrice
-
     }  if (sodaName == 'MegaPop') {
-
-
         priceChangeInput = document.getElementById('priceChangeInputMegaPop')
         newPrice =  priceChangeInput.value
         newPrice = parseInt(newPrice)
-
         const cola_data = {
             'sodaName':'MegaPop',
             'newPrice': newPrice
         }
-    
         fetch('http://127.0.0.1:5000/api/admin/price_change', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Cache-Control': 'no-cache',
-    
             },
             body: JSON.stringify(cola_data)
             }).then(response => {
-
             }).catch(error => {console.error('Error:', error);
         });
         megaPrice = newPrice
         document.getElementById("megaPrice").innerText = megaPrice
-
     }
     priceChangeInput.value = ''
 }
 
+// When a soda file is purchased, the sodas information is added to a file,
+// and the customers balance is added to the file as well as change
 function download_soda_file() {
     console.log(purchaseCode)
     if (purchaseCode == "Cola! Enjoy!") {
-        const fileName = 'cola.json'; 
-        const url = './sodaFiles/cola.json';
+        const jsonData = {
+            "sodaName": "Cola",
+            "Description": "A basic no nonsense cola that is the perfect pick me up for any occasion.",
+            "CustomerChange": "$" + customerBalance
+
+            }
+        const fileName = 'Cola.json';
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
         const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName; 
-        document.body.appendChild(a); 
-        a.click(); 
-        a.remove();
-        
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
     if (purchaseCode == "Pop! Enjoy!") {
-        const fileName = 'pop.json'; 
-        const url = './sodaFiles/pop.json';
+        const jsonData = {
+            "sodaName": "Pop",
+            "Description": "An explosion of flavor that will knock your socks off!",
+            "CustomerChange": "$" + customerBalance
 
-        
+            }
+        const fileName = 'Pop.json';
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
         const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName; 
-
-        
-        document.body.appendChild(a); 
-
-      
-        a.click(); 
-
-        
-        a.remove();
-        
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
     if (purchaseCode == "Fizz! Enjoy!") {
-        const fileName = 'fizz.json'; 
-        const url = './sodaFiles/fizz.json';
+        const jsonData = {
+            "sodaName": "Fizz",
+            "Description": "An effervescent fruity experience with hints of grape and coriander.",
+            "CustomerChange": "$" + customerBalance
 
+            }
+        const fileName = 'Fizz.json';
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
         const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName; 
-
-        document.body.appendChild(a); 
-
-        a.click(); 
-
-        a.remove();
-        
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
     if (purchaseCode == "MegaPop! Enjoy!") {
-        const fileName = 'megapop.json'; 
-        const url = './sodaFiles/megapop.json';
+        const jsonData = {
+            "sodaName": "MegaPop",
+            "Description": "Not for the faint of heart. So flavorful and so invigorating, it should probably be illegal.",
+            "CustomerChange": "$" + customerBalance
 
+            }
+        const fileName = 'MegaPop.json';
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
         const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName; 
-
-        document.body.appendChild(a); 
-
-        a.click(); 
-
-        a.remove();
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 }
 
+// Function that takes all the inital values of the machine stock from stock.json
+// and updates the HTML variables
 function query_stock() {
     fetch("http://127.0.0.1:5000/api/display_stock", {
         method: 'GET'
@@ -445,19 +424,25 @@ function query_stock() {
     }); 
 }
 
+
+// Function that when a soda is purchases, commits the purchase API call to the server
+// and updates the stock.json information
 function purchase_soda (sodaName) {
     if (sodaName == "Cola") {
-        if (customerBalance >= colaPrice) {
+        // if the soda requested is cola
+        if (customerBalance >= colaPrice) {\
+            // if the customer has enough money to make the purchase
             customerBalance -= colaPrice
             document.getElementById("customerBalance").innerText = customerBalance
             machineBalance += colaPrice
             document.getElementById("machineBalance").innerText = machineBalance
             numPurchases += 1
             document.getElementById("numPurchases").innerText = numPurchases
+            // generate the json api body
             const cola_data = {
                 'sodaName':'Cola'
             }
-        
+            // make the API fetch call
             fetch('http://127.0.0.1:5000/api/customer_purchase', {
                 method: 'POST',
                 headers: {
@@ -469,15 +454,18 @@ function purchase_soda (sodaName) {
                 }).then(response => {
                 }).catch(error => {console.error('Error:', error);
             });
+            // subtract one from the available sodas in the machine.
             colaAvail = colaAvail - 1
             document.getElementById("colaAvail").innerText = colaAvail
 
         } else {
+            // if the customer does not have enough money, then ask for credit input
             purchaseCode = "Insert Credit"
             document.getElementById("purchaseCode").innerText = purchaseCode
         }
         
     } 
+    //
     if (sodaName == "Pop") {
         if (customerBalance >= popPrice) {
             customerBalance -= popPrice
