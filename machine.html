@@ -125,12 +125,13 @@
 
                             <div class="upperButtons">
                                 <button class="selectionButton" id="purchaseButton" onclick="code_change('A')"> A </button>
-                                <button class="selectionButton" id="purchaseButton" onclick="code_change('2')"> 2 </button>
+                                
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('1')"> 1 </button>
                             </div>
 
                             <div class="lowerButtons">
                                 <button class="selectionButton" id="purchaseButton" onclick="code_change('B')"> B </button>
-                                <button class="selectionButton" id="purchaseButton" onclick="code_change('1')"> 1 </button>
+                                <button class="selectionButton" id="purchaseButton" onclick="code_change('2')"> 2 </button>
                             </div>
 
                             <div class="purchaseSelectionArea">
@@ -145,6 +146,7 @@
                             
                             <h2 class="BalanceDisplay"> Balance: $<span id="customerBalance"></span>
                             <h3>Insert coins/bills</h3>
+                            <button class="purchaseSelection" onclick="clear_balance()"> Change </button>
 
                             <div class="slots">
                                 <div class="billSlot"></div>

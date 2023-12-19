@@ -16,6 +16,10 @@ with open('stock.json') as f:
 # Api Def to change price of soda
 @app.route('/api/admin/price_change', methods=['POST'])
 def adm_price_change():
+    
+    # Function takes in the stock.json
+    # and modifies the spcified soda and its price
+    
     with open('stock.json') as f:
         current_soda_stock = json.load(f)    
 
@@ -64,6 +68,8 @@ def adm_restock():
 
 @app.route('/api/display_stock', methods=['GET'])
 def cst_display_stock():
+    # Simple GET call to take the stock.json file and send it as a 
+    # JSON structure to the HTML page for variable display
     with open('stock.json') as f:
         current_soda_stock = json.load(f)    
     return json.dumps(current_soda_stock)
@@ -71,8 +77,10 @@ def cst_display_stock():
 @app.route('/api/customer_purchase', methods=['POST', 'GET'])
 def cst_purchase():
     
-    # 
-        
+    # When function is called, we take in the current stock file,
+    # and then modify the variables as needed
+    # and finally rewrite the stock file and send the json structure as API response body
+    
     with open('stock.json') as f:
         current_soda_stock = json.load(f)
     

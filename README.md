@@ -52,6 +52,7 @@ Product Name: Mega Pop
 
 For the backend of my vending machine project, I decided to use Python. To get started, I downloaded the following packages:
 - Flask
+- Flask_cors
 - Requests
 
 To run the vending machine, first clone the repo and install the require packages, and then CD into the virtualVendingMachine directory and run: 'python main.py'
@@ -67,8 +68,6 @@ To make a purchase:
 # Backend
 
 Flask is the web framework I used in order to be able to connect the frontend and backend using API calls. Requests is a package also used for the front to back communications, which helped me with API formatting, and handling the return responses.
-
-
 
 I followed two different self created standards for the API calls. The calls that an Admin would use to restock, reprice, or check the stock of the vending machine is prefaced with the '/admin' keyword. Here are the calls, and their body structures.
 
